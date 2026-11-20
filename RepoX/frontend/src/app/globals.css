@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS variables matching reference editorial color palette */
+:root {
+  --background: #F8F8FA;
+  --foreground: #09090B;
+  --primary: #E11D74;
+}
+
+/* Base styles */
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  min-height: 100vh;
+}
+
+@layer base {
+  html {
+    @apply text-foreground bg-[#F8F8FA];
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-gray-950 font-bold tracking-tight;
+  }
+}

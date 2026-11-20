@@ -1,0 +1,32 @@
+version: '3.8'
+
+# Production - External Database (Supabase/Cloud)
+services:
+  # Backend API - Production Mode
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      # Database URL from environment (Supabase/external)
+      DATABASE_URL: ${DATABASE_URL}
+      
+      # LLM Configuration
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      
+      # Analysis Configuration
+      TOP_FILES: ${TOP_FILES:-50}
+      COMPONENT_COUNT: ${COMPONENT_COUNT:-8}
+      
+      # Application Configuration
+      WORK_DIR: /tmp/repo-architect
+      SQL_DEBUG: ${SQL_DEBUG:-false}
+      DEBUG: ${DEBUG:-false}
+    ports:
+      - "8000:8000"
+    volumes:
+      - repo_temp:/tmp/repo-architect
+    restart: unless-stopped
+
+volumes:
+  repo_temp:
